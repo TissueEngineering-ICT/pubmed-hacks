@@ -85,7 +85,7 @@ def csv_export(request):
 
     for Paper in Paper_info_list:
         try:
-            row = [Paper.PMID, Paper.Date_publish, Paper.Title, Paper.Author, Paper.Abstract, Paper.journal.name, Paper.DOI]
+            row = [Paper.PMID, Paper.Date_publish, Paper.Title, Paper.Author, Paper.Abstract, Paper.journal.name, Paper.journal.impact_factor, Paper.DOI]
             writer.writerow([str(item).encode("shift_jis", errors='ignore').decode("shift_jis") for item in row])
         except:
             pass
