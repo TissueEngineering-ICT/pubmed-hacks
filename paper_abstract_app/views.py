@@ -81,7 +81,6 @@ def csv_export(request):
     writer = csv.writer(response)
     Paper_info_list = Articlemodel.objects.all()
     header = ['PMID','Date_publish','Title','Author','Abstract','JournalTitle','SJR','DOI']
-    writer.writerow([str(item).encode("shift_jis", errors='ignore').decode("shift_jis") for item in header])
     writer.writerow(header)
 
     for Paper in Paper_info_list:
@@ -91,7 +90,6 @@ def csv_export(request):
         except:
             pass
     return response
-
 
 def import_impact_factors(request):
     if request.method == 'POST':
