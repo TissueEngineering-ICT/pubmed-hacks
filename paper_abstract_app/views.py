@@ -81,11 +81,13 @@ def csv_export(request):
     writer = csv.writer(response)
     Paper_info_list = Articlemodel.objects.all()
     header = ['PMID','Date_publish','Title','Author','Abstract','JournalTitle','SJR','DOI']
+    writer.writerow([str(item).encode("shift_jis", errors='ignore').decode("shift_jis") for item in header])
     writer.writerow(header)
 
     for Paper in Paper_info_list:
         try:
-            writer.writerow([Paper.PMID, Paper.Date_publish,Paper.Title,Paper.Author,Paper.Abstract,Paper.Journal.name,Paper.Journal.impact_factor,Paper.DOI])
+            row = [Paper.PMID, Paper.Date_publish, Paper.Title, Paper.Author, Paper.Abstract, Paper.journal.name, Paper.DOI]
+            writer.writerow([str(item).encode("shift_jis", errors='ignore').decode("shift_jis") for item in row])
         except:
             pass
     return response
